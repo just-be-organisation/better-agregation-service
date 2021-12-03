@@ -1,8 +1,8 @@
-FROM adoptopenjdk/openjdk15
+FROM adoptopenjdk/openjdk11
 
 MAINTAINER Vladyslav Yemelianov <emelyanov.vladyslav@gmail.com>
 
-ADD ./target/na-tg-client.jar /app/
-CMD ["java", "-Xmx512m", "-jar", "/app/na-tg-client.jar"]
+ADD ./target/aggregation-service.jar /app/
+CMD ["java", "-Xmx512m", "-jar", "/app/aggregation-service.jar"]
 
 EXPOSE 8080
