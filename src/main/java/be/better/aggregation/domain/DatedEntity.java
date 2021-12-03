@@ -1,0 +1,41 @@
+package be.better.aggregation.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import java.util.Date;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@MappedSuperclass
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(includeFieldNames = false)
+public class DatedEntity extends IdEntity {
+
+    @Column(name = "creation_date", nullable = false)
+    @EqualsAndHashCode.Exclude
+    private Date creationDate;
+    @Column(name = "update_date", nullable = false)
+    @EqualsAndHashCode.Exclude
+    private Date updateDate;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.creationDate == null) {
+            Date date = new Date();
+            this.creationDate = date;
+            this.updateDate = date;
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updateDate = new Date();
+    }
+}
