@@ -1,10 +1,12 @@
 version: '3.5'
 services:
   aggregation-service:
-    image: docker.pkg.github.com/news-aggregator-bot/artifactory/bepicky.na-tg-client
+    image: ghcr.io/just-be-organisation/better.aggregation-service
     environment:
+      - POSTGRES_AGGREGATION_SERVICE_DB=${POSTGRES_AGGREGATION_SERVICE_DB}
+      - POSTGRES_AGGREGATION_SERVICE_USER=${POSTGRES_AGGREGATION_SERVICE_USER}
+      - POSTGRES_AGGREGATION_SERVICE_PASSWORD=${POSTGRES_AGGREGATION_SERVICE_PASSWORD}
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
-      - TG_CLIENT_TOKEN=${TG_CLIENT_TOKEN}
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 60s
@@ -23,5 +25,5 @@ services:
 networks:
   default:
     external:
-      name: picky
+      name: better
 

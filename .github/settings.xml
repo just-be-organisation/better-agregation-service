@@ -1,0 +1,34 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>just-be</id>
+            <username>${env.GITHUB_USER}</username>
+            <password>${env.GITHUB_TOKEN}</password>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>just-be</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+                <repository>
+                    <id>just-be</id>
+                    <name>better-artifactory</name>
+                    <url>https://maven.pkg.github.com/just-be-organisation/better-artifactory</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>just-be</activeProfile>
+    </activeProfiles>
+</settings>
